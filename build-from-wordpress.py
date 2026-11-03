@@ -92,6 +92,8 @@ skip = re.compile(r'(^|/)page/\d+/$|^/type/')
 urls = sorted(u for u in kept if not skip.search(u))
 open(OUT + '/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     ''.join(f'  <url><loc>https://www.{DOMAIN}{u}</loc></url>\n' for u in urls) + '</urlset>\n')
+# AdSense publisher file (the old site had none; same publisher ID as the ads on the pages)
+open(OUT + '/ads.txt', 'w').write('google.com, pub-6564027149745277, DIRECT, f08c47fec0942fa0\n')
 open(OUT + '/robots.txt', 'w').write(f'User-agent: *\nAllow: /\n\nSitemap: https://www.{DOMAIN}/sitemap.xml\n')
 red = ['# WordPress endpoints, feeds and sitemaps',
        '/feed/   /   301', '/comments/feed/   /   301', '/wp-login.php   /   301', '/wp-admin/   /   301', '/xmlrpc.php   /   301',
